@@ -2,23 +2,45 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs";
 
-    nixos-generators.url = "github:nix-community/nixos-generators";
-    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
+
+    rouxinold-bot.url = "github:EduRenesto/rouxinold-bot";
+    rouxinold-bot.inputs.nixpkgs.follows = "nixpkgs";
+
+    rouxinold-autohalt.url = "github:EduRenesto/rouxinold-autohalt";
+    rouxinold-autohalt.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, nixos-generators, ... }: {
+  outputs = { self, nixpkgs, deploy-rs, rouxinold-bot, rouxinold-autohalt, ... }: {
     devShells.aarch64-darwin.default = let
       pkgs = nixpkgs.legacyPackages.aarch64-darwin;
     in pkgs.mkShell {
-      buildInputs = with pkgs; [ opentofu ];
+      buildInputs = with pkgs; [
+        opentofu
+        nodejs
+        yarn
+
+        deploy-rs.packages.aarch64-darwin.default
+      ];
     };
 
-    packages.x86_64-linux.oci-image = nixos-generators.nixosGenerate {
+    nixosConfigurations.rxnl-wdog = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./nixos/mc1-server.nix
+        ({ config, pkgs, ... }: { nixpkgs.overlays = [ rouxinold-bot.overlays.rouxinold ]; })
+        rouxinold-bot.nixosModules.rouxinold
+        ./nixos/configuration-rxnl-wdog.nix
       ];
-      format = "qcow";
+    };
+
+    deploy.nodes.rxnl-wdog = {
+      hostname = "144.22.169.245";
+      profiles.system = {
+        user = "root";
+        sshUser = "root";
+        path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.rxnl-wdog;
+      };
     };
   };
 }

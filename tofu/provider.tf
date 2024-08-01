@@ -24,13 +24,29 @@ terraform {
       source = "oracle/oci"
       version = "6.0.0"
     }
+
+    cloudflare = {
+      source = "cloudflare/cloudflare"
+      version = "~> 4.0"
+    }
   }
 }
-
 provider "oci" {
   region = "${var.region}"
   tenancy_ocid = "${var.tenancy_ocid}"
   user_ocid = "${var.user_ocid}"
   fingerprint = "${var.fingerprint}"
   private_key_path = "${var.private_key_path}"
+}
+
+provider "cloudflare" {
+  api_token = file("../rsa/cf-token-nonewline")
+}
+
+variable "cf_account_id" {
+  default = "331a3b7223b7a41d9845e66a7533fd54"
+}
+
+variable "cf_zone_id" {
+  default = "a9c311f79ee06c249feb89bd8ff5beec"
 }

@@ -52,7 +52,32 @@ resource "oci_core_security_list" "patotanet-public-security-list" {
 
     tcp_options {
       min = 25565
-      max = 25565
+      max = 25575
+    }
+  }
+
+  ingress_security_rules {
+    stateless = false
+    source = "0.0.0.0/0"
+    source_type = "CIDR_BLOCK"
+    protocol = "6" # 6 is TCP
+
+    tcp_options {
+      min = 80
+      max = 80
+    }
+  }
+
+  # Allow Loki, Prometheus
+  ingress_security_rules {
+    stateless = false
+    source = "0.0.0.0/0"
+    source_type = "CIDR_BLOCK"
+    protocol = "6" # 6 is TCP
+
+    tcp_options {
+      min = 3001
+      max = 3002
     }
   }
 }
