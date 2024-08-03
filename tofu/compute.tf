@@ -2,17 +2,6 @@ resource "oci_core_instance" "rxnl-mc1" {
   availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
   compartment_id = oci_identity_compartment.patota-compartment.id
 
-  # shape = "VM.Standard.A1.Flex"
-  # shape_config {
-  #   ocpus = 2
-  #   memory_in_gbs = 2
-  # }
-  # source_details {
-  #   # Ubuntu 22.04 Minimal aarch64
-  #   source_id = "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaatzk6r6llclqeyxqkko72f2yfjgk3slcfuvygcedyzzc43u73rqnq"
-  #   source_type = "image"
-  # }
-
   shape = "VM.Standard.E2.2"
   source_details {
     source_id = "ocid1.image.oc1.sa-saopaulo-1.aaaaaaaa5dnsil74ysi3u4f7ajk4aoujv3fvxppbsdxi4onu3ss54ahgwmva"
@@ -34,6 +23,10 @@ resource "oci_core_instance" "rxnl-mc1" {
 
 output "rxnl-mc1-ip" {
   value = oci_core_instance.rxnl-mc1.public_ip
+}
+
+output "rxnl-mc1-ocid" {
+  value = oci_core_instance.rxnl-mc1.id
 }
 
 resource "oci_core_instance" "rxnl-wdog" {
@@ -61,4 +54,8 @@ resource "oci_core_instance" "rxnl-wdog" {
 
 output "rxnl-wdog-ip" {
   value = oci_core_instance.rxnl-wdog.public_ip
+}
+
+output "rxnl-wdog-ocid" {
+  value = oci_core_instance.rxnl-wdog.id
 }

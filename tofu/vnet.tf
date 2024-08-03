@@ -30,7 +30,7 @@ resource "oci_core_security_list" "patotanet-public-security-list" {
     protocol = "all"
   }
 
-  # Allow SSH (22)
+  # Allow SSH tarpit (22)
   ingress_security_rules {
     stateless = false
     source = "0.0.0.0/0"
@@ -40,6 +40,19 @@ resource "oci_core_security_list" "patotanet-public-security-list" {
     tcp_options {
       min = 22
       max = 22
+    }
+  }
+
+  # Allow SSH (2212)
+  ingress_security_rules {
+    stateless = false
+    source = "0.0.0.0/0"
+    source_type = "CIDR_BLOCK"
+    protocol = "6" # 6 is TCP
+
+    tcp_options {
+      min = 2212
+      max = 2212
     }
   }
 
@@ -71,13 +84,26 @@ resource "oci_core_security_list" "patotanet-public-security-list" {
   # Allow Loki, Prometheus
   ingress_security_rules {
     stateless = false
-    source = "0.0.0.0/0"
+    source = "10.0.0.0/24"
     source_type = "CIDR_BLOCK"
     protocol = "6" # 6 is TCP
 
     tcp_options {
       min = 3001
       max = 3002
+    }
+  }
+
+  # Allow prometheus exporters
+  ingress_security_rules {
+    stateless = false
+    source = "10.0.0.0/24"
+    source_type = "CIDR_BLOCK"
+    protocol = "6" # 6 is TCP
+
+    tcp_options {
+      min = 9000
+      max = 9001
     }
   }
 }

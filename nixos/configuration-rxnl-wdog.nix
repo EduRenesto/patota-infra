@@ -24,7 +24,24 @@
     fsType = "vfat";
   };
 
-  services.openssh.enable = true;
+  networking.hostName = "rxnl-wdog";
+
+  services.openssh = {
+    enable = true;
+    ports = [ 2212 ];
+    openFirewall = true;
+    settings = {
+      AllowUsers = [ "root" "rhaenys" ];
+      PasswordAuthentication = false;
+    };
+  };
+
+  services.endlessh-go = {
+    enable = true;
+    port = 22;
+    openFirewall = true;
+  };
+  services.fail2ban.enable = true;
 
   environment.systemPackages = with pkgs; [
     curl
@@ -51,6 +68,7 @@
   services.loki = {
     enable = true;
     configuration = {
+      auth_enabled = false;
       server.http_listen_port = 3002;
       common = {
         ring = {
@@ -88,6 +106,22 @@
   services.prometheus = {
     enable = true;
     port = 3001;
+
+    globalConfig.scrape_interval = "30s";
+
+    scrapeConfigs = [
+      {
+        job_name = "rxnl-mc1";
+        static_configs = [
+          {
+            targets = [
+              "10.0.0.188:9000" # node-exporter
+              "10.0.0.188:9001" # mc-exporter
+            ];
+          }
+        ];
+      }
+    ];
   };
 
   services.nginx = {
@@ -96,6 +130,7 @@
       locations."/" = {
         proxyPass = "http://127.0.0.1:${toString config.services.grafana.settings.server.http_port}";
         proxyWebsockets = true;
+        recommendedProxySettings = true;
       };
     };
   };

@@ -18,3 +18,14 @@ resource "oci_core_volume_attachment" "mc1_storage_att" {
 
   volume_id = oci_core_volume.mc1_storage.id
 }
+
+resource "oci_objectstorage_bucket" "mc_public" {
+  compartment_id = oci_identity_compartment.patota-compartment.id
+  name = "mc_public"
+  namespace = "grytuiwswqfo"
+  access_type = "ObjectReadWithoutList"
+}
+
+output "mc_public_bucket_ocid" {
+  value = oci_objectstorage_bucket.mc_public.id
+}

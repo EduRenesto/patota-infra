@@ -36,6 +36,24 @@
         "type": "github"
       }
     },
+    "crane_3": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_4"
+      },
+      "locked": {
+        "lastModified": 1722704454,
+        "narHash": "sha256-lcut8uZMSa80z+aWpxg+9nM8BKWtpU59rtcpMXtHd1Q=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "852a59f9672c3413d75bca2b3e9cb4c661cacfc3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
     "deploy-rs": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -74,13 +92,52 @@
         "type": "github"
       }
     },
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1710146030,
+        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "mc-forge-nix": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1722650813,
+        "narHash": "sha256-bLIOLtqi8g2QImekFfdaIgBm1w/Fo2PE1GFDotZ5tHg=",
+        "owner": "EduRenesto",
+        "repo": "minecraft-forge-nix",
+        "rev": "3958f43a25b00ef9b076c192ed895e03d84496da",
+        "type": "github"
+      },
+      "original": {
+        "owner": "EduRenesto",
+        "repo": "minecraft-forge-nix",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1722390337,
-        "narHash": "sha256-tqeh+Fh97/MaUQ+g8JHJVJgbTT9wUJuGYKB9z5Ex7n8=",
+        "lastModified": 1722650261,
+        "narHash": "sha256-Zg8t0jVFadWor0rSEyY0Rzk3DJl1il8jWtF7nyb6ff8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5fbeaf6d89ff1ff08a59a0f0b34d6eb33fb75307",
+        "rev": "54aac3b3bbc39d2c22938d7a4eff49eaaa517e7a",
         "type": "github"
       },
       "original": {
@@ -121,12 +178,30 @@
         "type": "github"
       }
     },
+    "nixpkgs_4": {
+      "locked": {
+        "lastModified": 1722640603,
+        "narHash": "sha256-TcXjLVNd3VeH1qKPH335Tc4RbFDbZQX+d7rqnDUoRaY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "81610abc161d4021b29199aa464d6a1a521e0cc9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "deploy-rs": "deploy-rs",
+        "mc-forge-nix": "mc-forge-nix",
         "nixpkgs": "nixpkgs",
         "rouxinold-autohalt": "rouxinold-autohalt",
-        "rouxinold-bot": "rouxinold-bot"
+        "rouxinold-bot": "rouxinold-bot",
+        "rouxinold-mc-exporter": "rouxinold-mc-exporter"
       }
     },
     "rouxinold-autohalt": {
@@ -137,15 +212,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1722390540,
-        "narHash": "sha256-0N10mlM7ESVG9KjkPDv9csKte4c37YY95Y0EZOBVfBk=",
+        "lastModified": 1722708962,
+        "narHash": "sha256-rHyQhzjOP4nf5tCo6BhEG1htMZ5tcy8WZS6r9bH5E8U=",
         "owner": "EduRenesto",
         "repo": "rouxinold-autohalt",
-        "rev": "16fdda37c50078299560fa0528c3df45a8aa3499",
+        "rev": "17b4763b780b0058f0659acb1312c5c9108168e3",
         "type": "github"
       },
       "original": {
         "owner": "EduRenesto",
+        "ref": "v0.1.0",
         "repo": "rouxinold-autohalt",
         "type": "github"
       }
@@ -158,11 +234,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1722375046,
-        "narHash": "sha256-qG2k1zJ/yBeUy1XlqHeInX4UAcFExN14jmjTpFAsAS0=",
+        "lastModified": 1722645067,
+        "narHash": "sha256-VfrlMAInmXBNmUbkBuvE+G/UyQkNodBiduNB+0Y1gTw=",
         "owner": "EduRenesto",
         "repo": "rouxinold-bot",
-        "rev": "1620b1ac2a08a9dc6a8370829f249ebac5538798",
+        "rev": "cd946a000b97ff13800b98b5aaf10db2dfc7c8a1",
         "type": "github"
       },
       "original": {
@@ -171,7 +247,44 @@
         "type": "github"
       }
     },
+    "rouxinold-mc-exporter": {
+      "inputs": {
+        "crane": "crane_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1722717929,
+        "narHash": "sha256-i0JuP05wIz4SQtbA0Uxxxef+B3wsrbRFgbIXp1p2lMY=",
+        "owner": "EduRenesto",
+        "repo": "rouxinold-mc-exporter",
+        "rev": "6a914d5c5f01a56e162f68c10234a85dab895a07",
+        "type": "github"
+      },
+      "original": {
+        "owner": "EduRenesto",
+        "ref": "v0.1.0",
+        "repo": "rouxinold-mc-exporter",
+        "type": "github"
+      }
+    },
     "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
